@@ -8,7 +8,7 @@ args = parser.parse_args()
 
 
 options = {
-    'name': f'n0012_{args.model}',
+    'name': f'n0012_base_{args.model}',
     'resetAP': True,
     'autoRestart': False,
 }
@@ -51,20 +51,13 @@ solverOptions = {
     }[args.model],
 
     "nsubiter": 3,
-    "nsubiterturb": 100,
-
+    "nsubiterturb": 20,
 
 
     # ANK
     "useANKSolver": True,
     "ANKUseTurbDADI": True,
     "ANKADPC": False,
-    # 'anksecondordswitchtol': 1e-3,
-    # 'anksecondordswitchtol': 1e-8,
-    # 'ankasmoverlap': 4,
-    # "outerPreconIts": 3,
-    # 'ankunsteadylstol': 1.2,
-
 
 
     # General

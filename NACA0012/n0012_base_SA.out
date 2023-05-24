@@ -1,0 +1,20 @@
+n0012_SA
+
+Aero Options
+--------------  -----------
+alpha           3
+reynolds        5000000.0
+mach            0.3
+T               288
+reynoldsLength  1.0
+xRef            0.25
+areaRef         1.0
+chordRef        1.0
+evalFuncs       cl, cd, cmz
+--------------  -----------
+
+
+ RESULTS 
+        cd          cl         cmz    totalRes    iterTot
+----------  ----------  ----------  ----------  ---------
+0.00937162  0.35725889  0.00084199  0.00000182        469
