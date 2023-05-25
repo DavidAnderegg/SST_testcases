@@ -1,4 +1,7 @@
 *.cgns
+*.log
+*.out
+*.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

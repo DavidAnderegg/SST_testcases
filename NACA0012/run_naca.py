@@ -1,6 +1,7 @@
 from adflow_util import ADFLOW_UTIL
 import argparse
 from mpi4py import MPI
+import pickle
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-model', type=str, default='SST',
@@ -11,11 +12,18 @@ args = parser.parse_args()
 
 state = f'base_{MPI.COMM_WORLD.Get_size()}np'
 
+def save_conv_history(Solver, AP, n):
+    hist = Solver.getConvergenceHistory()
+    if MPI.COMM_WORLD.rank == 0:
+        with open(f'conv_hist_{state}_{args.model}.pkl', "wb") as f:
+            pickle.dump(hist, f)
 
 options = {
     'name': f'n0012_{state}_{args.model}',
     'resetAP': True,
     'autoRestart': False,
+
+    'postRunCallback': save_conv_history,
 }
 
 aeroOptions = {
@@ -66,7 +74,7 @@ solverOptions = {
 
 
     # General
-    'monitorvariables':['resrho', 'resturb', 'cl','cd'],
+    'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
     'printIterations': True,
     'writeSurfaceSolution': True,
     'writeVolumeSolution': True,
