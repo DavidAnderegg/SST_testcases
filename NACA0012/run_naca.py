@@ -1,5 +1,6 @@
 from adflow_util import ADFLOW_UTIL
 import argparse
+from mpi4py import MPI
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-model', type=str, default='SST',
@@ -7,8 +8,12 @@ parser.add_argument('-model', type=str, default='SST',
 args = parser.parse_args()
 
 
+
+state = f'base_{MPI.COMM_WORLD.Get_size()}np'
+
+
 options = {
-    'name': f'n0012_base_{args.model}',
+    'name': f'n0012_{state}_{args.model}',
     'resetAP': True,
     'autoRestart': False,
 }

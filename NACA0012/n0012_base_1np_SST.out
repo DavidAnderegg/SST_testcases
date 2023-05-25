@@ -1,0 +1,20 @@
+n0012_base_1_SST
+
+Aero Options
+--------------  -----------
+alpha           3
+reynolds        5000000.0
+mach            0.3
+T               288
+reynoldsLength  1.0
+xRef            0.25
+areaRef         1.0
+chordRef        1.0
+evalFuncs       cl, cd, cmz
+--------------  -----------
+
+
+ RESULTS 
+        cd          cl         cmz    totalRes    iterTot
+----------  ----------  ----------  ----------  ---------
+0.00914727  0.35594364  0.00056438  0.00000185        323
