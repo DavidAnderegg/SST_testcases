@@ -2,19 +2,22 @@ import os
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
-# import baseclasses
 import argparse
 
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-case', type=str, default='NACA0012',
+    parser.add_argument('-case', type=str, default='NACA0012_f1_mod',
                         help='The case to plot')
     args = parser.parse_args()
 
 
 
     cases = {
+    # #############################################
+    # NACA 0012
+    # #############################################
+
             "NACA0012": {
                 "SST_base_np6": {
                     "dir": 'NACA0012',
@@ -33,14 +36,59 @@ def main():
                     "hist": 'conv_hist_base_6np_SA.pkl',
                     "model": 'SA',
                     },
-                # "SA_base_np1": {
-                #     "dir": 'NACA0012',
-                #     "hist": 'conv_hist_base_1np_SA.pkl',
-                #     "model": 'SA',
-                #     },
-
+                "SA_base_np1": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_base_1np_SA.pkl',
+                    "model": 'SA',
+                    },
                 },
 
+
+            "NACA0012_f1_mod": {
+                "SST_base_np6": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_base_6np_SST.pkl',
+                    "model": 'SST',
+                    },
+                "SST_base_np1": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_base_1np_SST.pkl',
+                    "model": 'SST',
+                    },
+
+
+                "SST_f1_mod_np1": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_f1_mod_1np_SST.pkl',
+                    "model": 'SST',
+                    },
+                "SST_f1_mod_np6": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_f1_mod_6np_SST.pkl',
+                    "model": 'SST',
+                    },
+                 "SST_f1_mod_np12": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_f1_mod_12np_SST.pkl',
+                    "model": 'SST',
+                    },
+                 "SST_f1_mod_np24": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_f1_mod_24np_SST.pkl',
+                    "model": 'SST',
+                    },
+                 "SST_f1_mod_np48": {
+                    "dir": 'NACA0012',
+                    "hist": 'conv_hist_f1_mod_48np_SST.pkl',
+                    "model": 'SST',
+                    },
+
+               },
+
+
+    # #############################################
+    # RAE 2822
+    # #############################################
             "RAE2822": {
                 "SST_base_np6": {
                     "dir": 'RAE2822',
