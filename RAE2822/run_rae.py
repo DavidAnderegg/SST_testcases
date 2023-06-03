@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 
 
-state = f'base_{MPI.COMM_WORLD.Get_size()}np'
+state = f'f1_mod_{MPI.COMM_WORLD.Get_size()}np'
 
 def save_conv_history(Solver, AP, n):
     hist = Solver.getConvergenceHistory()

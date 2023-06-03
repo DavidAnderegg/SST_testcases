@@ -114,6 +114,32 @@ def main():
                     },
                 },
 
+            "RAE2822_f1_mod": {
+                "SST_base_np6": {
+                    "dir": 'RAE2822',
+                    "hist": 'conv_hist_base_6np_SST.pkl',
+                    "model": 'SST',
+                    },
+                "SST_base_np1": {
+                    "dir": 'RAE2822',
+                    "hist": 'conv_hist_base_1np_SST.pkl',
+                    "model": 'SST',
+                    },
+
+
+                "SST_f1_mod_np6": {
+                    "dir": 'RAE2822',
+                    "hist": 'conv_hist_f1_mod_6np_SST.pkl',
+                    "model": 'SST',
+                    },
+                "SST_f1_mod_np1": {
+                    "dir": 'RAE2822',
+                    "hist": 'conv_hist_f1_mod_1np_SST.pkl',
+                    "model": 'SST',
+                    },
+                },
+
+
             }
 
     turb_models = {
