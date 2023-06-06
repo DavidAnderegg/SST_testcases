@@ -139,6 +139,45 @@ def main():
                     },
                 },
 
+    # #############################################
+    # flatplate
+    # #############################################
+            "flatplate_L2_nan-fix": {
+                "SST_nan-fix_np6": {
+                    "dir": 'flatplate',
+                    "hist": 'conv_hist_nan-fix_6np_SST_L2.pkl',
+                    "model": 'SST',
+                    },
+                "SST_nan-fix_np1": {
+                    "dir": 'flatplate',
+                    "hist": 'conv_hist_nan-fix_1np_SST_L2.pkl',
+                    "model": 'SST',
+                    },
+
+                "SA_nan_fix_np6": {
+                    "dir": 'flatplate',
+                    "hist": 'conv_hist_nan-fix_6np_SA_L2.pkl',
+                    "model": 'SA',
+                    },
+                },
+
+
+    # #############################################
+    # MACH_tut_wing
+    # #############################################
+            "wing_nan-fix": {
+                "SST_nan-fix_np6": {
+                    "dir": 'MACH_tut_wing',
+                    "hist": 'conv_hist_nan-fix_6np_SST.pkl',
+                    "model": 'SST',
+                    },
+
+                "SA_nan_fix_np6": {
+                    "dir": 'MACH_tut_wing',
+                    "hist": 'conv_hist_nan-fix_6np_SA.pkl',
+                    "model": 'SA',
+                    },
+                },
 
             }
 

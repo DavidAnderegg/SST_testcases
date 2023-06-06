@@ -75,14 +75,16 @@ solverOptions = {
     "nsubiter": 3,
     "nsubiterturb": 20,
 
+    # "smoother": "DADI", 
+    # "useANKSolver": False,
+
     # ANK
-    "useANKSolver": True,
     "ANKUseTurbDADI": True,
-    "ANKADPC": False,
-    # 'ANKASMOverlap': 2,
-    # 'ANKPCILUFill': 3,
-    # 'ANKInnerPreconIts': 2,
-    # 'ANKOuterPreconIts': 2,
+    "ANKADPC": True,
+    'ANKASMOverlap': 2,
+    'ANKPCILUFill': 3,
+    'ANKInnerPreconIts': 2,
+    'ANKOuterPreconIts': 2,
 
     # General
     'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
