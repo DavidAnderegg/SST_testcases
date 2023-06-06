@@ -11,9 +11,10 @@ parser.add_argument('-level', type=str, default='L4',
 
 args = parser.parse_args()
 
+with open('../current_build_state', 'r') as file:
+     current_build_state = file.read().replace('\n', '')
 
-
-state = f'f1_mod_{MPI.COMM_WORLD.Get_size()}np'
+state = f'{current_build_state}_{MPI.COMM_WORLD.Get_size()}np'
 
 def save_conv_history(Solver, AP, n):
     hist = Solver.getConvergenceHistory()
