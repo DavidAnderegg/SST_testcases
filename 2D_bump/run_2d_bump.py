@@ -23,7 +23,8 @@ def save_conv_history(Solver, AP, n):
             pickle.dump(hist, f)
 
 def preRunCallBack(solver, ap, n):
-    ap.setBCVar("Pressure", 1013e2, "out")
+    # ap.setBCVar("Pressure", 98994.45, "out")
+    ap.setBCVar("Pressure", 1013.0e2, "out")
 
 options = {
     'name': f'2dbump_{state}_{args.model}_{args.level}',
@@ -37,7 +38,7 @@ options = {
 aeroOptions = {
     'alpha': 0,
     'T': 300, # 540 rankine
-    'P': 1013e2,
+    'P': 1013.005e2,
     'V': 28.414,
 
     'reynoldsLength': 1.0,
@@ -75,20 +76,25 @@ solverOptions = {
     "nsubiter": 3,
     "nsubiterturb": 20,
 
+
     # ANK
     "useANKSolver": True,
     "ANKUseTurbDADI": True,
-    "ANKADPC": False,
+    "ANKADPC": True,
+    'ANKASMOverlap': 2,
+    'ANKPCILUFill': 3,
+    'ANKInnerPreconIts': 2,
+    'ANKOuterPreconIts': 2,
 
     # General
-    'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
+    'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz', 'cdp', 'cdv'],
     'printIterations': True,
     'writeSurfaceSolution': True,
     'writeVolumeSolution': True,
     'outputsurfacefamily': 'wall',
-    'surfacevariables': ['cp','vx', 'vy','vz', 'mach'],
+    'surfacevariables': ['cp','vx', 'vy','vz', 'mach', 'cf'],
     "volumeVariables": ["vort","eddy",'resrho'],
-    'nCycles':20000,
+    'nCycles':10000,
     'L2Convergence':1e-12,
 }
 

@@ -2,6 +2,8 @@
 *.log
 *.out
 *.pkl
+*.pw
+*meshes*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
