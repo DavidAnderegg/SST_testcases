@@ -39,7 +39,7 @@ aeroOptions = {
     'T': 300, # 540 rankine
     'P': 1013e2,
     'reynoldsNumber': 3e6,
-    'mach': 0.3,
+    'mach': 0.2,
 
     'reynoldsLength': 1.0,
     'xRef': 0.25,
