@@ -1,3 +1,5 @@
+import numpy as np
+
 convergence_cases = {
 # #############################################
 # NACA 0012
@@ -224,13 +226,55 @@ grid_convergence_cases = {
                     "model": 'SST',
                     },
 
-                # "SA_nan-fix_np6": {
-                #     "dir": '2D_bump',
-                #     "hist": 'conv_hist_nan-fix_6np_SA_{level}.pkl',
-                #     "model": 'SA',
-                #     }
+                "SA_nan-fix_np6": {
+                    "dir": '2D_bump',
+                    "hist": 'conv_hist_nan-fix_6np_SA_{level}.pkl',
+                    "model": 'SA',
+                    }
+                }
+            },
+
+        "flatplate_nan-fix": {
+            "ref-data": {
+                "N": [208896, 52224, 13056, 3264, 816],
+                "levels": ['L0', 'L1', 'L2', 'L3', 'L4'],
+                "values2plot": ['CoefLift', 'CoefDrag'], # 'CoefPressureDrag', 'CoefViscousDrag'],
+                "names2plot": ['$C_l$', '$C_d$'], #'$C_{d_p}$', '$C_{d_v}$'],
+                },
+            "data": {
+                "CFL3D": {
+                    "CoefLift": np.zeros(5) * np.nan,
+                    "CoefDrag": [ 0.285332397E-02, 0.284557154E-02, 0.282596960E-02, 0.278506994E-02, 0.270623102E-02],
+                    "CoefPressureDrag": np.zeros(5) * np.nan,
+                    "CoefViscousDrag": np.zeros(5) * np.nan,
+                    },
+                "FUN3d": {
+                    "CoefLift": np.zeros(5) * np.nan,
+                    "CoefDrag": [0.2844174E-02, 0.2821307E-02, 0.2773290E-02, 0.2678684E-02, 0.2511992E-02],
+                    "CoefPressureDrag": np.zeros(5) * np.nan,
+                    "CoefViscousDrag": np.zeros(5) * np.nan,
+                    }
+                },
+            "plots": {
+                "SST_nan-fix_np6": {
+                    "dir": 'flatplate',
+                    "hist": 'conv_hist_nan-fix_6np_SST_{level}.pkl',
+                    "model": 'SST',
+                    },
+
+                "SA_nan-fix_np6": {
+                    "dir": 'flatplate',
+                    "hist": 'conv_hist_nan-fix_6np_SA_{level}.pkl',
+                    "model": 'SA',
+                    }
                 }
             }
+
         }
+
+
+
+
+
 
 
