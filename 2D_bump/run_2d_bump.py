@@ -23,8 +23,7 @@ def save_conv_history(Solver, AP, n):
             pickle.dump(hist, f)
 
 def preRunCallBack(solver, ap, n):
-    # ap.setBCVar("Pressure", 98994.45, "out")
-    ap.setBCVar("Pressure", 1013.0e2, "out")
+    ap.setBCVar("Pressure", 1013e2, "out")
 
 options = {
     'name': f'2dbump_{state}_{args.model}_{args.level}',
@@ -38,8 +37,9 @@ options = {
 aeroOptions = {
     'alpha': 0,
     'T': 300, # 540 rankine
-    'P': 1013.005e2,
-    'V': 28.414,
+    'P': 1013e2,
+    'reynoldsNumber': 3e6,
+    'mach': 0.3,
 
     'reynoldsLength': 1.0,
     'xRef': 0.25,

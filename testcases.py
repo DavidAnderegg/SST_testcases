@@ -199,8 +199,7 @@ grid_convergence_cases = {
         "2d_bump_nan-fix": {
             "ref-data": {
                 "N": [901120, 225280, 56320, 14080, 3520],
-                # "levels": ['L0', 'L1', 'L2', 'L3', 'L4'],
-                "levels": ['L2', 'L3', 'L4'],
+                "levels": ['L00', 'L11', 'L2', 'L3', 'L4'],
                 "values2plot": ['CoefLift', 'CoefDrag', 'CoefPressureDrag', 'CoefViscousDrag'],
                 "names2plot": ['$C_l$', '$C_d$', '$C_{d_p}$', '$C_{d_v}$'],
                 },
