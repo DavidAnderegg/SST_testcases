@@ -71,17 +71,27 @@ def main():
 
         # actually plot
         for m in range(n_values2plot):
-            axs[m].plot(h, values2plot[m, :], label=plot_name)
+            axs[m].plot(h, values2plot[m, :], '-+', label=plot_name)
 
     # plot comparision data
     for plot_name, plot_data in case['data'].items():
         for m in range(n_values2plot):
-            axs[m].plot(h, plot_data[case['ref-data']['values2plot'][m]], label=plot_name)
+            axs[m].plot(
+                    h, plot_data[case['ref-data']['values2plot'][m]], 
+                    '-+', label=plot_name
+                    )
 
 
+    n = 0
     for ax in axs:
         ax.set_xlabel('$\\sqrt{\\frac{1}{N}}$', labelpad=5)
         ax.set_xlim(0, None)
+        ax.set_ylim(
+                case['ref-data']['min2plot'][n],
+                case['ref-data']['max2plot'][n],
+                )
+
+        n += 1
 
     # adjust plot
     for m in range(n_values2plot):
