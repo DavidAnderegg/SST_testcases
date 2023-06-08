@@ -69,9 +69,32 @@ convergence_cases = {
                 "hist": 'conv_hist_f1_mod_48np_SST.pkl',
                 "model": 'SST',
                 },
-
            },
 
+        "NACA0012_refac": {
+            "SST_base_np6": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_6np_SST.pkl',
+                "model": 'SST',
+                },
+            "SST_base_np1": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_1np_SST.pkl',
+                "model": 'SST',
+                },
+
+
+            "SST_refac_np1": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_refac_1np_SST.pkl',
+                "model": 'SST',
+                },
+            "SST_refac_np6": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_refac_6np_SST.pkl',
+                "model": 'SST',
+                },
+           },
 
 # #############################################
 # RAE 2822
