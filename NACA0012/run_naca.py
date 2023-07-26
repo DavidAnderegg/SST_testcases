@@ -54,6 +54,7 @@ solverOptions = {
     # Common Parameters
     'gridFile': 'n0012.cgns',
     'outputDirectory':'output',
+    # 'restartFile': 'output/n0012_ad_6np_SST_vol.cgns',
 
     # Physics Parameters
     'equationType':'RANS',
@@ -62,18 +63,20 @@ solverOptions = {
     'turbulenceModel': model,
     "turbResScale": {
         'SA': 10e4,
-        'SST': [1e3, 1e-8],
-    }[args.model],
+        'SST': [1e3, 1e-6],
+       }[args.model],
 
-    "nsubiter": 3,
     "nsubiterturb": 20,
-
 
     # ANK
     "useANKSolver": True,
-    "ANKUseTurbDADI": True,
-    "ANKADPC": False,
-
+    "ANKADPC": True,
+    "ANKSecondOrdSwitchTol": 1e-6,
+    "ANKCoupledSwitchTol": 1e-6,
+    'ANKASMOverlap': 2,
+    'ANKPCILUFill': 3,
+    'ANKInnerPreconIts': 2,
+    'ANKOuterPreconIts': 2,
 
     # General
     'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
@@ -84,7 +87,9 @@ solverOptions = {
     'surfacevariables': ['cp','vx', 'vy','vz', 'mach'],
     "volumeVariables": ["vort","eddy",'resrho'],
     'nCycles':20000,
-    'L2Convergence':1e-12,
+    'L2Convergence':1e-14,
+
+    "solutionPrecision": "double",
 }
 
 au = ADFLOW_UTIL(aeroOptions, solverOptions, options)

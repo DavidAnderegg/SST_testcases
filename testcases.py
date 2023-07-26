@@ -96,6 +96,58 @@ convergence_cases = {
                 },
            },
 
+        "NACA0012_ad": {
+            "SST_base_np6": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_6np_SST.pkl',
+                "model": 'SST',
+                },
+            "SST_base_np1": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_1np_SST.pkl',
+                "model": 'SST',
+                },
+
+
+            "SST_ad_np2": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_ad_2np_SST.pkl',
+                "model": 'SST',
+                },
+            "SST_ad_np6": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_ad_6np_SST.pkl',
+                "model": 'SST',
+                },
+           },
+
+        "NACA0012": {
+            "base 6cpus": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_6np_SST.pkl',
+                "model": 'SST',
+                },
+            "base 1cpu": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_base_1np_SST.pkl',
+                "model": 'SST',
+                },
+
+
+            "modified 1cpu": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_report_1np_SST.pkl',
+                "model": 'SST',
+                },
+            "modified 6cpus": {
+                "dir": 'NACA0012',
+                "hist": 'conv_hist_report_6np_SST.pkl',
+                "model": 'SST',
+                },
+           },
+
+
+
 # #############################################
 # RAE 2822
 # #############################################
@@ -148,6 +200,32 @@ convergence_cases = {
                 "model": 'SST',
                 },
             },
+
+        "RAE2822": {
+            "base 6cpus": {
+                "dir": 'RAE2822',
+                "hist": 'conv_hist_base_6np_SST.pkl',
+                "model": 'SST',
+                },
+            "base 1cpu": {
+                "dir": 'RAE2822',
+                "hist": 'conv_hist_base_1np_SST.pkl',
+                "model": 'SST',
+                },
+
+
+            "modified 6cpus": {
+                "dir": 'RAE2822',
+                "hist": 'conv_hist_report_6np_SST.pkl',
+                "model": 'SST',
+                },
+            "modified 1cpu": {
+                "dir": 'RAE2822',
+                "hist": 'conv_hist_report_1np_SST.pkl',
+                "model": 'SST',
+                },
+            },
+
 
 # #############################################
 # flatplate
@@ -263,6 +341,13 @@ grid_convergence_cases = {
                     "hist": 'conv_hist_nan-fix_6np_SST_{level}.pkl',
                     "model": 'SST',
                     },
+
+                "SST_vorticity_np6": {
+                    "dir": '2D_bump',
+                    "hist": 'conv_hist_report_6np_SST_{level}.pkl',
+                    "model": 'SST',
+                    },
+
 
                 "SA_nan-fix_np6": {
                     "dir": '2D_bump',

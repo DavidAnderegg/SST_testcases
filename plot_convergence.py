@@ -2,16 +2,29 @@ import os
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import argparse
+
+plt.style.use('tableau-colorblind10')
 
 from testcases import convergence_cases, turb_models
 
 def main():
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-case', type=str, default='NACA0012_f1_mod',
+    parser = argparse.ArgumentParser() 
+    # parser.add_argument('-case', type=str, default='NACA0012_f1_mod',
+    # parser.add_argument('-case', type=str, default='NACA0012',
+    parser.add_argument('-case', type=str, default='RAE2822',
                         help='The case to plot')
+    parser.add_argument('-save', type=int, default=0,
+                        help='Saves the plot when set to 1')
     args = parser.parse_args()
+
+    # set style stuff
+    mpl.rcParams['font.family'] = 'Avenir'
+    plt.rcParams['font.size'] = 10
+    plt.rcParams['axes.linewidth'] = 2
+
 
     # create figure
     fig, axs = plt.subplots(2, 3)
@@ -78,15 +91,31 @@ def main():
     axs[4].set_ylabel('log(RSDTurbVar1RMS)')
     axs[5].set_ylabel('log(RSDTurbVar2RMS)')
 
-    axs[0].legend()
+    axs[0].legend(frameon=False, fontsize=10, borderpad=1)
 
 
-    fig.set_figwidth(18)
-    fig.set_figheight(10)
+
+    s = 0.6
+    fig.set_figwidth(18*s)
+    fig.set_figheight(10*s)
 
     plt.suptitle(case_name)
     plt.tight_layout()
-    plt.show()
+
+
+    if not args.save:
+        plt.suptitle(args.case)
+        plt.show()
+    else:
+        d = 'plots'
+        if not os.path.exists(d):
+            os.makedirs(d)
+
+        plt.savefig(
+            os.path.join(d, f'sc_{args.case}.pdf'),
+            dpi=300, transparent=False, bbox_inches='tight'
+        )
+
 
 def minmax_coef(minmax, hist_array):
     minmax[0] = min(minmax[0], hist_array[-1])

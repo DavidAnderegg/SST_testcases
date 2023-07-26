@@ -61,18 +61,19 @@ solverOptions = {
     'turbulenceModel': model,
     "turbResScale": {
         'SA': 10e4,
-        'SST': [1e3, 1e-8],
-    }[args.model],
+        'SST': [1e3, 1e-6],
+       }[args.model],
 
-    "nsubiter": 3,
     "nsubiterturb": 20,
-
 
     # ANK
     "useANKSolver": True,
-    "ANKUseTurbDADI": True,
-    "ANKADPC": False,
-
+    "ANKADPC": True,
+    "ANKNSubiterTurb": 3,
+    "ANKSecondOrdSwitchTol": 1e-5,
+    "ANKCoupledSwitchTol": 1e-7,
+    "ANKMaxIter": 80,
+    "ANKLinResMax": 0.05,
 
     # General
     'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
@@ -83,8 +84,12 @@ solverOptions = {
     'surfacevariables': ['cp','vx', 'vy','vz', 'mach'],
     "volumeVariables": ["vort","eddy",'resrho'],
     'nCycles':20000,
-    'L2Convergence':1e-12,
+    'L2Convergence':1e-14,
 }
+
+if MPI.COMM_WORLD.Get_size() == 1:
+    solverOptions['ANKMaxIter'] = 35
+    # solverOptions["ANKCFLLimit"] = 1e4
 
 au = ADFLOW_UTIL(aeroOptions, solverOptions, options)
 au.run()
