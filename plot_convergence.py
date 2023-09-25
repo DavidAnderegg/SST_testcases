@@ -12,9 +12,9 @@ from testcases import convergence_cases, turb_models
 def main():
 
     parser = argparse.ArgumentParser() 
-    # parser.add_argument('-case', type=str, default='NACA0012_f1_mod',
+    parser.add_argument('-case', type=str, default='NACA0012_f1_mod',
     # parser.add_argument('-case', type=str, default='NACA0012',
-    parser.add_argument('-case', type=str, default='RAE2822',
+    # parser.add_argument('-case', type=str, default='RAE2822',
                         help='The case to plot')
     parser.add_argument('-save', type=int, default=0,
                         help='Saves the plot when set to 1')
@@ -87,9 +87,9 @@ def main():
     axs[1].set_ylabel('$C_d$')
     axs[2].set_ylabel('$C_m$')
 
-    axs[3].set_ylabel('log(RSDMassRMS)')
-    axs[4].set_ylabel('log(RSDTurbVar1RMS)')
-    axs[5].set_ylabel('log(RSDTurbVar2RMS)')
+    axs[3].set_ylabel('$log(||density||)$')
+    axs[4].set_ylabel('$log(||k||)$')
+    axs[5].set_ylabel('$log(||\omega||)$')
 
     axs[0].legend(frameon=False, fontsize=10, borderpad=1)
 

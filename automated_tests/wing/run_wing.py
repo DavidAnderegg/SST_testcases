@@ -37,7 +37,7 @@ defaultFuncList = [
 options = {
     'name': "mdo_tutorial",
     'autoRestart': False,
-    "postRunCallback": solveAdjoint
+    # "postRunCallback": solveAdjoint
 }
 
 aeroOptions = {
@@ -58,7 +58,7 @@ aeroOptions = {
 solverOptions = {
     # Common Parameters
     'gridFile': 'mdo_tutorial_rans.cgns',
-    'restartFile': 'output/mdo_tutorial_vol.cgns',
+    # 'restartFile': 'output/mdo_tutorial_vol.cgns',
     'outputDirectory':'output',
 
     # Physics Parameters
@@ -66,19 +66,23 @@ solverOptions = {
     'useblockettes': False,
 
     'turbulenceModel': 'Menter SST',
-    "turbResScale": [1e3, 1e-8],
+    "turbResScale": [1e3, 1e-6],
 
-    "nsubiter": 3,
     "nsubiterturb": 20,
+    "useMatrixFreedrdw": False,
+
 
     # ANK
     "useANKSolver": True,
     "ANKUseTurbDADI": True,
-    "ANKADPC": False,
+    "ANKADPC": True,
+
+    "ANKSecondOrdSwitchTol": 1e-4,
+    "ANKCoupledSwitchTol": 1e-6,
 
     "monitorVariables": ["resrho", "totalr", "cl", "cd"],
-    "L2Convergence": 1e-15,
-    "adjointL2Convergence": 1e-16,
+    "L2Convergence": 1e-14,
+    "adjointL2Convergence": 1e-14,
 
     "solutionPrecision": "double",
     "outputSurfaceFamily": "wall",

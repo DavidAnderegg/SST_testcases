@@ -28,7 +28,7 @@ def preRunCallBack(solver, ap, n):
 options = {
     'name': f'2dbump_{state}_{args.model}_{args.level}',
     'resetAP': True,
-    'autoRestart': False,
+    'autoRestart': True,
 
     'preRunCallBack':  preRunCallBack,
     'postRunCallback': save_conv_history,
@@ -70,21 +70,24 @@ solverOptions = {
     'turbulenceModel': model,
     "turbResScale": {
         'SA': 10e4,
-        'SST': [1e3, 1e-8],
+        'SST': [1e3, 1e-6],
     }[args.model],
 
     "nsubiter": 3,
     "nsubiterturb": 20,
-
+    "turbulenceProduction": "vorticity",
 
     # ANK
     "useANKSolver": True,
     "ANKUseTurbDADI": True,
     "ANKADPC": True,
+    "ANKSecondOrdSwitchTol": 1e-5,
     'ANKASMOverlap': 2,
     'ANKPCILUFill': 3,
     'ANKInnerPreconIts': 2,
     'ANKOuterPreconIts': 2,
+    # "ANKUseMatrixFree": False,
+
 
     # General
     'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz', 'cdp', 'cdv'],
@@ -94,7 +97,7 @@ solverOptions = {
     'outputsurfacefamily': 'wall',
     'surfacevariables': ['cp','vx', 'vy','vz', 'mach', 'cf'],
     "volumeVariables": ["vort","eddy",'resrho'],
-    'nCycles':10000,
+    'nCycles':20000,
     'L2Convergence':1e-12,
 }
 

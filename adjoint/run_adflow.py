@@ -68,6 +68,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-mode', type=str, default='adjoint',
                         help='Either "adjoint" or "complex"')
+    parser.add_argument('-step_size', type=float, default=1e-40,
+                        help='Step size for complex mode')
+    parser.add_argument('-revFast', type=int, default=0,
+                        help='use forwardPartials when 0;' + \
+                                ' use reversFastPartials when 1')
+
+
     args = parser.parse_args()
 
     modes = ['adjoint', 'cfd', 'complex']
@@ -84,6 +91,12 @@ def main():
     if not os.path.exists(aeroOptions['outputDirectory']):
         os.makedirs(aeroOptions['outputDirectory'])
 
+    if args.revFast == 1:
+        aeroOptions['useMatrixFreedrdw'] = True
+
+    if args.mode == 'complex':
+        aeroOptions['ANKCFLLimit'] = 1e40
+
     ap = AeroProblem(
         name="mdo_tutorial",
         alpha=1.8,
@@ -97,8 +110,8 @@ def main():
         xRef=0.0,
         yRef=0.0,
         zRef=0.0,
-        evalFuncs=["fx", "mz", "cl", "cd", "cmz", "lift", "drag"],
-        # evalFuncs=['cl', "cd"],
+        # evalFuncs=["fx", "mz", "cl", "cd", "cmz", "lift", "drag"],
+        evalFuncs=['cl'],
     )
 
     for dv in ["alpha", "beta", "mach", "T", "xRef", "yRef", "zRef"]:
@@ -137,10 +150,11 @@ def main():
 
     # solve comples
     if args.mode == 'complex':
-        h = 1e-40
+        h = args.step_size
 
         # aero DVs
         for dv in ["alpha", "mach"]:  # defaultAeroDVs:
+        # for dv in []:  # defaultAeroDVs:
             setattr(ap, dv, getattr(ap, dv) + h * 1j)
 
             CFDSolver.resetFlow(ap)
@@ -191,10 +205,22 @@ def main():
     # save the functionals
     if MPI.COMM_WORLD.rank == 0:
         n_cpus = MPI.COMM_WORLD.size
+        s1 = aeroOptions['turbResScale'][0]
+        s2 = aeroOptions['turbResScale'][1]
         f_name = os.path.join(
-                    aeroOptions['outputDirectory'],
-                    f'funcSense_{args.mode}_np{n_cpus}_.pkl'
+                    'output',
+                    f'funcSense_{args.mode}_np{n_cpus}_s1{s1}_s2{s2}'
                 )
+
+        if args.mode == 'complex':
+            f_name += f'_h{h}'
+
+        if args.mode == 'adjoint':
+            if aeroOptions['useMatrixFreedrdw']:
+                f_name += '_revFast'
+
+        f_name += '.pkl'
+
         with open(f_name, "wb") as f:
             pickle.dump(funcsSens, f)
 

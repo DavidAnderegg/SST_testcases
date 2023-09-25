@@ -42,8 +42,8 @@ aeroOptions = {
 
     'reynoldsLength': 1.0,
     'xRef': 0.25,
-    'areaRef': 1.5,
-    'chordRef': 1.5,
+    'areaRef': 2.0,
+    'chordRef': 2.0,
     'evalFuncs': ['cl','cd', 'cmz'],
 }
 
@@ -64,27 +64,48 @@ solverOptions = {
     # Physics Parameters
     'equationType':'RANS',
     'useblockettes': False,
-    'liftIndex': 3,
 
     'turbulenceModel': model,
     "turbResScale": {
         'SA': 10e4,
-        'SST': [1e3, 1e-8],
-    }[args.model],
+        'SST': [1e3, 1e-6],
+       }[args.model],
 
-    "nsubiter": 3,
     "nsubiterturb": 20,
+
+    # ANK
+    "useANKSolver": True,
+    "ANKSecondOrdSwitchTol": 1e-5,
+    # "ANKCoupledSwitchTol": 1e-7,
+    # 'ANKUnsteadyLSTol': 1.1,
+    # 'ANKASMOverlap': 4,
+    # 'ANKPCILUFill': 5,
+    # 'ANKInnerPreconIts': 4,
+    # 'ANKOuterPreconIts': 3,
+
+    # "ANKUseTurbDADI": False,
+    "ANKADPC": True,
+
+    # "ANKCFLLimit": 1e3,
+    'ANKCFlFactor': 2.,
+    # 'ANKCFLCutback': 0.,
+
+    # "ANKMaxIter": 40,
+    # 'ANKLinearSolveTol': 0.025,
+    # 'ANKLinResMax': 0.04,
+    # "ANKLinResMax": 0.04,
+
 
     # "smoother": "DADI", 
     # "useANKSolver": False,
 
     # ANK
-    "ANKUseTurbDADI": True,
-    "ANKADPC": True,
-    'ANKASMOverlap': 2,
-    'ANKPCILUFill': 3,
-    'ANKInnerPreconIts': 2,
-    'ANKOuterPreconIts': 2,
+    # "ANKUseTurbDADI": True,
+    # "ANKADPC": True,
+        # 'ANKASMOverlap': 2,
+    # 'ANKPCILUFill': 3,
+    # 'ANKInnerPreconIts': 2,
+    # 'ANKOuterPreconIts': 2,
 
     # General
     'monitorvariables':['resrho', 'resturb', 'cl','cd', 'cmz'],
@@ -94,9 +115,20 @@ solverOptions = {
     'outputsurfacefamily': 'wall',
     'surfacevariables': ['cp','vx', 'vy','vz', 'mach'],
     "volumeVariables": ["vort","eddy",'resrho'],
-    'nCycles':20000,
+    'nCycles':40000,
     'L2Convergence':1e-12,
 }
+
+if args.level == 'L2':
+    solverOptions['ANKCFLLimit'] = 1.5e2
+
+elif args.level == 'L1':
+    solverOptions['ANKCFlFactor'] = 1.3
+    solverOptions['ANKCFLExponent'] = 0.01
+    # solverOptions['ANKJacobianLag'] = 2
+    solverOptions['ANKCFLLimit'] = 1.0e2
+    solverOptions['ANKSecondOrdSwitchTol'] = 1e-7
+
 
 au = ADFLOW_UTIL(aeroOptions, solverOptions, options)
 au.run()

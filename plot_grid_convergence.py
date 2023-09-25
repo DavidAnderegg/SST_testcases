@@ -14,6 +14,7 @@ from testcases import grid_convergence_cases, turb_models
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-case', type=str, default='2d_bump_nan-fix',
+    # parser.add_argument('-case', type=str, default='flatplate_nan-fix',
                     help='The Test-case to plot')
     parser.add_argument('-save', type=int, default=0,
                         help='Saves the plot when set to 1')
@@ -78,7 +79,7 @@ def main():
         for m in range(n_values2plot):
             axs[m].plot(
                     h, plot_data[case['ref-data']['values2plot'][m]], 
-                    '-+', label=plot_name
+                    '--+', label=plot_name
                     )
 
 

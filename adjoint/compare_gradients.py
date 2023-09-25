@@ -19,27 +19,50 @@ def main():
     n_significant_digits = 10
 
     cases = {
-            "complex_np6": {
+            "complex_np6_h1e-200": {
                     "file_name": os.path.join(
-                        output_dir, f'funcSense_complex_np6_.pkl'
+                        output_dir, f'funcSense_complex_np6_h1e-200.pkl'
                         # output_dir, f'funcSense_adjoint_np6_.pkl'
                         ),
                 },
 
-            "adjoint_np6": {
+            "complex_np6": {
                     "file_name": os.path.join(
-                        output_dir, f'funcSense_adjoint_np6_.pkl'
+                        output_dir, f'funcSense_complex_np6_h1e-40.pkl'
+                        # output_dir, f'funcSense_adjoint_np6_.pkl'
                         ),
                 },
+
+
+
+            "adjoint_np6": {
+                    "file_name": os.path.join(
+                        output_dir, f'funcSense_adjoint_np6_s11000.0_s21e-06.pkl'
+                        ),
+                },
+
+            # "adjoint_np6_v2": {
+            #         "file_name": os.path.join(
+            #             output_dir, f'funcSense_adjoint_np6_s110000.0_s21e-10.pkl'
+            #             ),
+            #     },
+
 
             "adjoint_np1": {
                     "file_name": os.path.join(
-                        output_dir, f'funcSense_adjoint_np1_.pkl'
+                        output_dir, f'funcSense_adjoint_np1_s11000.0_s21e-06.pkl'
                         ),
                 },
 
+            "adjoint_np6_revFast": {
+                    "file_name": os.path.join(
+                        output_dir, f'funcSense_adjoint_np6_s11000.0_s21e-06_revFast.pkl'
+                        ),
+                },
 
             }
+
+    base_case = 'complex_np6_h1e-200'
 
     # load deriv data
     for case_name, case in cases.items():
@@ -52,11 +75,11 @@ def main():
     table = list()
 
     # compare derivs
-    for func_name in cases['complex_np6']['funcsSens'].keys():
+    for func_name in cases[base_case]['funcsSens'].keys():
         table.append([func_name])
 
-        for dv_name in cases['complex_np6']['funcsSens'][func_name].keys():
-            desvars = cases['complex_np6']['funcsSens'][func_name][dv_name]
+        for dv_name in cases[base_case]['funcsSens'][func_name].keys():
+            desvars = cases[base_case]['funcsSens'][func_name][dv_name]
             if not isinstance(desvars, np.ndarray):
                 desvars = [[desvars]]
 
@@ -68,7 +91,10 @@ def main():
                 # iterate through all cases and gather values
                 values = list()
                 for case in cases.values():
-                    value = case['funcsSens'][func_name][dv_name]
+                    try: 
+                        value = case['funcsSens'][func_name][dv_name]
+                    except KeyError:
+                        continue
 
                     if isinstance(value, np.ndarray):
                         value = value[0][m]
